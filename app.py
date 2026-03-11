@@ -19,11 +19,11 @@ async def lifespan(app: FastAPI):
     for _ in range(30):
         try:
             db = mysql.connector.connect(
-                host=os.getenv("DB_HOST", "db"),
-                user=os.getenv("DB_USER", "root"),
-                password=os.getenv("DB_PASSWORD", ""),
-                database=os.getenv("DB_NAME", "guessgame"),
-                port=int(os.getenv("DB_PORT", "3306"))
+                host=os.environ["DB_HOST"],
+                user=os.environ["DB_USER"],
+                password=os.environ["DB_PASSWORD"],
+                database=os.environ["DB_NAME"],
+                port=int(os.environ["DB_PORT"],)
             )
             cursor = db.cursor()
             with open("init.sql") as f:
